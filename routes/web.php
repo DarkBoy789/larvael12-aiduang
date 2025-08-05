@@ -1,6 +1,8 @@
  <?php
 
     use App\Http\Controllers\CategoryController;
+    use App\Models\Product;
+    use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Route;
     use Inertia\Inertia;
 
@@ -149,3 +151,29 @@
     Route::get('/category/politic', [CategoryController::class, "politic"]);
     Route::get('/category/entertain', [CategoryController::class, "entertain"]);
     Route::get('/category/auto', [CategoryController::class, "auto"]);
+
+    // use App\Models\Product;
+    // use Illuminate\Support\Facades\DB;
+
+    Route::get('query/sql', function () {
+        $products = DB::select("SELECT * FROM products");
+        return view('query-test', compact('products'));
+    });
+
+    Route::get('query/builder', function () {
+        $products = DB::table('products')->get();
+        return view('query-test', compact('products'));
+    });
+
+    Route::get('query/orm', function () {
+        $products = Product::get();
+        return view('query-test', compact('products'));
+    });
+
+    Route::get('product/form', function () {
+        //
+    })->name("product.form");
+
+    Route::get('barchart', function () {
+        return view('barchart');
+    })->name('barchart');
