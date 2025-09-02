@@ -177,3 +177,5 @@
     Route::get('barchart', function () {
         return view('barchart');
     })->name('barchart');
+
+    
